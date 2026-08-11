@@ -1,0 +1,15 @@
+services:
+  container1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cc7261:aula2-1
+    volumes:
+      - ./c1.py:/arquivos/main.py
+  container2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cc7261:aula2-1
+    volumes:
+      - ./c2.py:/arquivos/main.py
