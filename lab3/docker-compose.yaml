@@ -1,0 +1,33 @@
+services:
+  broker:
+    build: .
+    command: python broker.py
+    networks:
+      - reqrep-net
+
+  servidor:
+    build: .
+    command: python servidor.py
+    depends_on:
+      - broker
+    networks:
+      - reqrep-net
+
+  cliente:
+    build: .
+    command: python cliente.py
+    depends_on:
+      - broker
+      - servidor
+    networks:
+      - reqrep-net
+    stdin_open: true
+    tty: true
+
+networks:
+  reqrep-net:
+    driver: bridge
+
+# Para testar com múltiplas réplicas de servidor ou cliente, use:
+#   docker compose up --scale servidor=3
+#   docker compose up --scale cliente=2
